@@ -2,14 +2,19 @@ package model;
 
 public class ItemEntrega {
 
-    private String identificador;
+    private Integer identificador;
     private String nome;
 
-    public String getIdentificador() {
+    public ItemEntrega(Integer identificador, String nome){
+        this.identificador = identificador;
+        this.nome = nome;
+    }
+
+    public Integer getIdentificador() {
         return identificador;
     }
 
-    public void setIdentificador(String identificador) {
+    public void setIdentificador(Integer identificador) {
         this.identificador = identificador;
     }
 

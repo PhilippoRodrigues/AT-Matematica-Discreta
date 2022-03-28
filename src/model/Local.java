@@ -1,22 +1,29 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
-
 public class Local {
 
-    private String Identificador;
+    private Integer identificador;
     private String nome;
 
-    private Stack<ItemEntrega> itens = new Stack<>();
+    private ItemEntrega item;
 
-    public String getIdentificador() {
-        return Identificador;
+    public Local(Integer identificador, String nome){
+        this.identificador = identificador;
+        this.nome = nome;
     }
 
-    public void setIdentificador(String identificador) {
-        Identificador = identificador;
+    public Local(Integer idLocalEscolhido, String nomeLocalEscolhido, ItemEntrega item){
+        this.identificador = idLocalEscolhido;
+        this.nome = nomeLocalEscolhido;
+        this.item = item;
+    }
+
+    public Integer getIdentificador() {
+        return identificador;
+    }
+
+    public void setIdentificador(Integer identificador) {
+        this.identificador = identificador;
     }
 
     public String getNome() {
@@ -27,11 +34,11 @@ public class Local {
         this.nome = nome;
     }
 
-    public Stack<ItemEntrega> getItens() {
-        return itens;
+    public ItemEntrega getItem() {
+        return item;
     }
 
-    public void setItens(Stack<ItemEntrega> itens) {
-        this.itens = itens;
+    public void setItem(ItemEntrega item) {
+        this.item = item;
     }
 }

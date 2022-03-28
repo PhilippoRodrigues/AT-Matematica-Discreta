@@ -6,17 +6,17 @@ public class Caminhao {
 
     private String placa;
     private Local local;
-    private Stack<ItemEntrega> itens = new Stack<>();
-
-    public Caminhao(String placa, Local local, Stack<ItemEntrega> itemEntrega){
-        this.placa = placa;
-        this.local = local;
-        this.itens = itemEntrega;
-    }
+    private ItemEntrega item;
 
     public Caminhao(String placa, Local local){
         this.placa = placa;
         this.local = local;
+    }
+
+    public Caminhao(String placa, Local local, ItemEntrega itemEntrega){
+        this.placa = placa;
+        this.local = local;
+        this.item = itemEntrega;
     }
 
     public String getPlaca() {
@@ -35,11 +35,11 @@ public class Caminhao {
         this.local = local;
     }
 
-    public Stack<ItemEntrega> getItens() {
-        return itens;
+    public ItemEntrega getItem() {
+        return item;
     }
 
-    public void setItens(Stack<ItemEntrega> itens) {
-        this.itens = itens;
+    public void setItens(ItemEntrega item) {
+        this.item = item;
     }
 }

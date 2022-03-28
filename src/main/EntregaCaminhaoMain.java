@@ -17,6 +17,7 @@ public class EntregaCaminhaoMain {
         ArrayList<Caminhao> caminhoes = new ArrayList<>();
 
         List<Local> itensLocaisEntrega = new ArrayList<>();
+        Stack<Caminhao> caminhoesEntrega = new Stack<>();
 
         int escolha;
 
@@ -58,9 +59,8 @@ public class EntregaCaminhaoMain {
                     System.out.printf("Insira a placa do caminhão: ");
                     scan.nextLine();
                     String placaCaminhao = scan.nextLine();
-                    Caminhao caminhao = new Caminhao(placaCaminhao, null, null);
-                    scan.nextLine();
 
+                    Caminhao caminhao = new Caminhao(placaCaminhao, null, null);
                     caminhoes.add(caminhao);
                     break;
                 case 4:
@@ -69,6 +69,9 @@ public class EntregaCaminhaoMain {
                         System.out.println("(" + j + ") " + "ID: " + item.getIdentificador() + " | " + "Nome: " + item.getNome());
                         j++;
                     }
+
+                    if (itens.size() == 0)
+                        System.out.println("Não há mais cadastros de itens para serem associados a um local");
 
                     System.out.println("Selecione um item para ser associado com o local: ");
                     int itemAssociacao = scan.nextInt();
@@ -99,7 +102,61 @@ public class EntregaCaminhaoMain {
 
                     itens.remove(itemAssociacao);
                     System.out.println(itens.size());
-                    System.out.println(itens.get(0).getNome());
+
+                    break;
+                case 5:
+
+                    j = 0;
+                    for (Local itemLocalEntrega : itensLocaisEntrega) {
+                        System.out.println("(" + j + ") " + "ID: " + itemLocalEntrega.getIdentificador() + " | Nome: " + itemLocalEntrega.getNome() + "| Nome do item: " + itemLocalEntrega.getItem().getNome());
+                        j++;
+                    }
+
+                    System.out.println("Selecione um local para ser associado ao caminhão: ");
+                    int itemLocalAssociacao = scan.nextInt();
+
+                    if (itensLocaisEntrega.size() == 0)
+                        System.out.println("Não há mais cadastros de itens para serem associados a um caminhão");
+
+                    k = 0;
+                    for (Caminhao itemCaminhao : caminhoes) {
+                        System.out.println("(" + k + ") " + "Placa: " + itemCaminhao.getPlaca());
+                        k++;
+                    }
+
+                    System.out.println("Selecione um caminhão para ser associado com o local escolhido: ");
+                    int caminhaoAssociacao = scan.nextInt();
+
+                    Integer idItemLocalEscolhido = itensLocaisEntrega.get(itemLocalAssociacao).getIdentificador();
+                    String nomeItemLocalEscolhido = itensLocaisEntrega.get(itemLocalAssociacao).getNome();
+
+                    ItemEntrega itemCaminhaoEscolhido = itensLocaisEntrega.get(itemLocalAssociacao).getItem();
+
+                    String placaEscolhida = caminhoes.get(caminhaoAssociacao).getPlaca();
+
+                    Local local = new Local(idItemLocalEscolhido, nomeItemLocalEscolhido, itemCaminhaoEscolhido);
+
+                    caminhoesEntrega.push(new Caminhao(placaEscolhida, local));
+
+                    System.out.println(caminhoesEntrega.size());
+
+                    System.out.println("------------------------------------------");
+                    for (Caminhao itemCaminhao: caminhoesEntrega){
+                        System.out.println("Caminhão: " + itemCaminhao.getPlaca() + " | Local: " + itemCaminhao.getLocal().getNome() + " | item: " + itemCaminhao.getLocal().getItem().getNome());
+                        System.out.println("------------------------------------------");
+                    }
+
+//                    System.out.println(caminhoesEntrega.get(0).getPlaca());
+//                    System.out.println(caminhoesEntrega.get(0).getLocal().getIdentificador());
+//                    System.out.println(caminhoesEntrega.get(0).getLocal().getNome());
+//                    System.out.println(caminhoesEntrega.get(0).getLocal().getItem().getIdentificador());
+//                    System.out.println(caminhoesEntrega.get(0).getLocal().getItem().getNome());
+
+                    itensLocaisEntrega.remove(itemLocalAssociacao);
+
+                    System.out.println("Tamanho da lista de locais: " + itensLocaisEntrega.size());
+                    break;
+                case 6:
 
                     break;
                 default:
